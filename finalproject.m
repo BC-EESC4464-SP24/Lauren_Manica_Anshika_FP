@@ -30,3 +30,6 @@ plot(years, EgyptCO2, 'Color', 'y')
 xlabel('Years')
 ylabel('emissions (label?)')
 title('CO2 Emissions for Six Different Countries')
+legend('Brazil','China', 'USA', 'India','UK','Egypt','Location', 'northwest')
+%% 
+
