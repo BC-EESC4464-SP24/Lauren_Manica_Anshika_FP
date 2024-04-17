@@ -26,10 +26,18 @@ plot(years, ChinaCO2, 'Color', 'r')
 plot(years, USCO2, 'Color','m')
 plot(years, IndiaCO2, 'Color', 'b')
 plot(years, UKCO2, 'Color', 'c')
-plot(years, EgyptCO2, 'Color', 'y')
+plot(years, EgyptCO2, 'Color', 'k')
 xlabel('Years')
-ylabel('emissions (label?)')
-title('CO2 Emissions for Six Different Countries')
+ylabel('emissions (Megatonnes CO2)')
+title('CO2 Emissions By Country')
 legend('Brazil','China', 'USA', 'India','UK','Egypt','Location', 'northwest')
 %% 
+%world map of CO2 emisisons per capita for year 2022
+
+figure, clf
+worldmap world
+
+
+
+
 
