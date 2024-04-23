@@ -43,7 +43,56 @@ ylabel('Emissions (Metric Tonnes of CO2)')
 title('Country CO2 Emissions vs Global')
 legend('Brazil', 'China', 'Egypt', 'India', 'UK', 'USA', 'Global')
 
-%% 
+%% Production through Renewables:
+
+rendata = renpercentageproduction
+% rendata(1, :) = [];
+
+years=rendata(:,1);
+Brazilren=rendata(:,2);
+Chinaren=rendata(:,3);
+Egyptren=rendata(:,4);
+UKren=rendata(:,5);
+Indiaren=rendata(:,6);
+USren=rendata(:,7);
+
+figure, clf
+plot(years, Chinaren, 'Color', 'r', 'LineWidth',2);
+hold on;
+plot(years, USren, 'Color', 'b','LineWidth',2);
+plot(years, Indiaren, 'Color', 'g', 'LineWidth',2);
+plot(years, UKren, 'Color', 'm', 'LineWidth',2);
+plot(years, Egyptren, 'Color', 'k', 'LineWidth',2);
+plot(years, Brazilren,'Color', 'c', 'LineWidth',2);
+xlabel('Years')
+ylabel('% of Total Production (kWh)')
+title('Production through Renewables by Country')
+legend('China','USA','India','UK','Egypt','Brazil')
+
+%% developed vs. developing countries 
+
+%Dev country
+figure(2), clf
+plot(years, Chinaren, 'Color', 'r', 'LineWidth',2);
+hold on;
+plot(years, USren, 'Color', 'b','LineWidth',2);
+plot(years, UKren, 'Color', 'm', 'LineWidth',2);
+xlabel('Years')
+ylabel('% of Total Production (kWh)')
+title('Renewable Energy Production: Developed Countries')
+legend('China','USA','UK')
+
+%developing country 
+figure(3), clf
+plot(years, Indiaren, 'Color', 'g', 'LineWidth',2);
+hold on;
+plot(years, Egyptren, 'Color', 'k', 'LineWidth',2);
+plot(years, Brazilren,'Color', 'c', 'LineWidth',2);
+xlabel('Years')
+ylabel('% of Total Production (kWh)')
+title('Renewable Energy Production: Developing Countries')
+legend('India','Egypt','Brazil')
+
 
 
 
