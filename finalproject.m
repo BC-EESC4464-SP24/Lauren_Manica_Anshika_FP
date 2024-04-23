@@ -3,39 +3,55 @@
 
 %data for US, China, India, UK, Brazil, Egypt 
 
+
+
 %% 
-%loading in CO2 emissions data 
+%export emissions in MTCO2 not per person
 
-CO2data=table2array(exportemissions);
+totalcarbonemissions=table2array(countryemissions);
 
-%delete first two nan rows 
-CO2data(1:2, :) = [];
+% Delete the first row and the last three rows
+array_subsetemissions = totalcarbonemissions(2:end-3, :);
 
-years=CO2data(:,1);
-BrazilCO2=CO2data(:,2);
-ChinaCO2=CO2data(:,3);
-EgyptCO2=CO2data(:,4);
-IndiaCO2=CO2data(:,5);
-UKCO2=CO2data(:,6);
-USCO2=CO2data(:,7);
+globalemissions=table2array(totalemissions); 
+GlobalE= globalemissions*1000000000; %tons 
+
+
+years=array_subsetemissions(:,1);
+Brazil=array_subsetemissions(:,2)*1000000;
+China=array_subsetemissions(:,3)*1000000;
+Egypt=array_subsetemissions(:,4)*1000000;
+India=array_subsetemissions(:,5)*1000000;
+UK=array_subsetemissions(:,6)*1000000;
+USA=array_subsetemissions(:,7)*1000000;
 
 figure, clf
-plot(years, BrazilCO2, 'Color', 'g')
-hold on 
-plot(years, ChinaCO2, 'Color', 'r')
-plot(years, USCO2, 'Color','m')
-plot(years, IndiaCO2, 'Color', 'b')
-plot(years, UKCO2, 'Color', 'c')
-plot(years, EgyptCO2, 'Color', 'k')
-xlabel('Years')
-ylabel('emissions (Megatonnes CO2)')
-title('CO2 Emissions By Country')
-legend('Brazil','China', 'USA', 'India','UK','Egypt','Location', 'northwest')
-%% 
-%world map of CO2 emisisons per capita for year 2022
+hold on
+plot(years, Brazil, 'Color', 'g', 'LineWidth', 2)
+plot(years, China, 'Color', 'k', 'LineWidth', 2)
+plot(years, Egypt, 'Color', 'c','LineWidth', 2)
+plot(years, India, 'Color', 'm','LineWidth', 2)
+plot(years, UK, 'Color', 'r','LineWidth', 2)
+plot(years, USA, 'Color', 'b','LineWidth', 2)
+plot(years, GlobalE,'LineStyle','--', 'Color', 'k', 'LineWidth',2)
+ax = gca;
+ax.YAxis.Exponent = 0
+ax.YAxis.TickLabelFormat = '%,.0f';
+grid on
+xlabel('Years from 1960-2022')
+ylabel('Emissions (Metric Tonnes of CO2)')
+title('Country CO2 Emissions vs Global')
+legend('Brazil', 'China', 'Egypt', 'India', 'UK', 'USA', 'Global')
 
-figure, clf
-worldmap world
+%% 
+
+
+
+
+
+
+
+
 
 
 
