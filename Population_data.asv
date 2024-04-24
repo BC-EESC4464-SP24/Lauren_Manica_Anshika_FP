@@ -10,12 +10,12 @@ India = POP(7,2:64);
 
 hold on;
 figure(1); 
-plot(Years, China, 'r', 'DisplayName', 'China');
-plot(Years, Egypt, 'k', 'DisplayName', 'Egypt');
-plot(Years, UK, 'm', 'DisplayName', 'UK');
-plot(Years, US, 'b', 'DisplayName', 'US');
-plot(Years, India, 'g', 'DisplayName', 'India');
-plot(Years, Brazil, 'c', 'DisplayName', 'Brazil');
+plot(Years, China,  'DisplayName', 'China','LineWidth', 2);
+plot(Years, Egypt, 'DisplayName', 'Egypt','LineWidth', 2);
+plot(Years, UK, 'DisplayName', 'UK','LineWidth', 2);
+plot(Years, US, 'DisplayName', 'US','LineWidth', 2);
+plot(Years, India, 'DisplayName', 'India','LineWidth', 2);
+plot(Years, Brazil, 'DisplayName', 'Brazil','LineWidth', 2);
 grid on 
 
 ax = gca;
@@ -32,17 +32,57 @@ figure(2);
 subplot(2,1,1);
 title('Developed Countries Population');
 hold on
-plot(Years, China, 'r', 'DisplayName', 'China');
-plot(Years, UK, 'm', 'DisplayName', 'UK');
-plot(Years, US, 'b', 'DisplayName', 'US');
+plot(Years, China, 'DisplayName', 'China','LineWidth', 2);
+plot(Years, UK, 'DisplayName', 'UK','LineWidth', 2);
+plot(Years, US, 'DisplayName', 'US','LineWidth', 2);
 ax = gca;
 ax.YAxis.Exponent = 0
 ax.YAxis.TickLabelFormat = '%,.0f';
+legend('show');
+grid on
 
 
 subplot(2,1,2);
 title('Developing Countries Population');
 hold on
-plot(Years, India, 'g', 'DisplayName', 'India');
-plot(Years, Brazil, 'c', 'DisplayName', 'Brazil');
-plot(Years, Egypt, 'k', 'DisplayName', 'Egypt');
+plot(Years, India, 'DisplayName', 'India','LineWidth', 2);
+plot(Years, Brazil, 'DisplayName', 'Brazil','LineWidth', 2);
+plot(Years, Egypt', 'DisplayName', 'Egypt','LineWidth', 2);
+ax = gca;
+ax.YAxis.Exponent = 0
+ax.YAxis.TickLabelFormat = '%,.0f';
+legend('show');
+grid on
+
+%% World Map
+% Load coastlines data
+addpath(genpath('C:\Users\nawazm\Documents\GitHub\Lauren_Manica_Anshika_FP\EDEA Final Project Renewable Data'));
+figure;
+worldmap('World');
+load coastlines;
+hold on
+
+countryCode = ''; % Country code for Italy
+baseURL = 'http://biogeo.ucdavis.edu/data/gadm2.8/shp/???_adm_shp.zip'; % Base format for download (found direct-link using Google Chrome after downloading a sample file
+downloadURL = strrep(baseURL,'???',countryCode); % Country code for Italy is ITA, substitute into URL
+destinationFile = 'temporary_shapefile.zip'; % Name of temporary file to download (trash after using)
+
+urlwrite(downloadURL,destinationFile); % Download the zip file for country
+unzip(destinationFile,['.' filesep 'shapeFileFolder']); % Unzip contents
+delete(destinationFile); % Delete the zip file
+
+% Now plot the resulting shape file... numerous options in folder with varying levels of detail, pick adm0 set.
+figure; % Make a new figure
+shapeFile = ['.' filesep 'shapeFileFolder' filesep countryCode '_adm0.shp']; % Get the desired shape file
+geoshow(shapeFile); % Plot it up. High detail data so this could take a while.
+axis off; % Style preference, turn off plot axis and just show country
+
+% country = shaperead('gadm41_EGY_0.shp'); % Read shape file
+% [X, Y] = reducem(country.X',country.Y',0.01); % Play with tolerance to your liking
+%  % Make a new figure
+% geoshow(Y,X,'displaytype','polygon'); % Plot it up, just like above, only faster (lower resolution)
+% axis off; % Style preference, turn off plot axis and just show country
+% geoshow(coastlat, coastlon, 'DisplayType', 'line');
+% % egp = shaperead('gadm41_EGY_0.shp')
+
+
