@@ -43,34 +43,62 @@ ylabel('Emissions (Metric Tonnes of CO2)')
 title('Country CO2 Emissions vs Global')
 legend('Brazil', 'China', 'Egypt', 'India', 'UK', 'USA', 'Global')
 
+%% Production through Renewables:
+
+rendata = renpercentageproduction
+% rendata(1, :) = [];
+
+years=rendata(:,1);
+Brazilren=rendata(:,2);
+Chinaren=rendata(:,3);
+Egyptren=rendata(:,4);
+UKren=rendata(:,5);
+Indiaren=rendata(:,6);
+USren=rendata(:,7);
+
+figure, clf
+plot(years, Chinaren, 'LineWidth',2);
+hold on;
+plot(years, USren, 'LineWidth',2);
+plot(years, Indiaren, 'LineWidth',2);
+plot(years, UKren,'LineWidth',2);
+plot(years, Egyptren, 'LineWidth',2);
+plot(years, Brazilren, 'LineWidth',2);
+xlabel('Years')
+ylabel('% of Total Production (kWh)')
+title('Production through Renewables by Country')
+legend('China','USA','India','UK','Egypt','Brazil')
+
+%% developed vs. developing countries 
+
+%Dev country
+figure(2), clf
+plot(yearsrenew, Chinarenew, 'LineWidth',2);
+hold on;
+plot(yearsrenew, USrenew, 'LineWidth',2);
+plot(yearsrenew, UKrenew, 'LineWidth',2);
+xlabel('Years')
+ylabel('% of Total Production (kWh)')
+title('Renewable Energy Production: Developed Countries')
+legend('China','USA','UK')
+
+%developing country 
+figure(3), clf
+plot(yearsrenew, Indiarenew, 'LineWidth',2);
+hold on;
+plot(yearsrenew, Egyptrenew,  'LineWidth',2);
+plot(yearsrenew, Brazilrenew, 'LineWidth',2);
+xlabel('Years')
+ylabel('% of Total Production (kWh)')
+title('Renewable Energy Production: Developing Countries')
+legend('India','Egypt','Brazil')
+
 %% 
 
-figure;
-worldmap('World');
-load coastlines;
-geoshow(coastlat, coastlon, 'DisplayType', 'polygon', 'FaceColor', [0.5 0.7 1]);
-country_names=exportemissionscountry(1,:);
 
-world = shaperead('landareas', 'UseGeoCoords', true);
 
-for i = 1:numel(world)
-    % Find the index of the country in your data
-    idx = strcmpi(country_names, world(i).Name);
-    
-    % Check if the country is found in your data
-    if any(idx)
-        % Plot data on top of the country
-        geoshow(world(i).Lat, world(i).Lon, 'DisplayType', 'polygon', 'FaceColor', 'none', 'EdgeColor', 'k');
-        
-        % Get the population density for this country
-        density = population_density(idx);
-        
-        % Plot the population density as text at the centroid of the country
-        centroid_lat = mean(world(i).Lat);
-        centroid_lon = mean(world(i).Lon);
-        textm(centroid_lat, centroid_lon, sprintf('%.2f', density), 'HorizontalAlignment', 'center', 'Color', 'red');
-    end
-end
+
+
 
 
 
